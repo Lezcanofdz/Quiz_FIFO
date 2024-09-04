@@ -1,6 +1,6 @@
 //Definicion del tipo de trasacción
 
-typedef enum  { lectura, escritura,lectura_escritura, reset} tipo_trans;
+typedef enum  { lectura, escritura, reset, lectura_escritura} tipo_trans;
 
 //Transacción: este objeto representa las transacciones que entran y salen de la FiFo 
 

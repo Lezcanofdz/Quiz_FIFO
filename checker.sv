@@ -62,6 +62,13 @@ class checker #(parameter width=16, parameter depth =8);
                         emul_fifo.push_back(transaccion); 
                     end
                 end
+
+                lectura_escritura: begin
+                    // Verificación de la escritura
+                    if (vif.dato_out !== transaccion.dato) begin
+                        $display("Error: los datos leídos no coinciden con los datos escritos.");
+                    end
+                end
                 reset: begin
                     
                     contador_auxiliar = emul_fifo.size(); 

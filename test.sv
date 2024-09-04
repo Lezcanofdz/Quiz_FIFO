@@ -41,6 +41,13 @@ class test #(parameter width = 16, parameter depth =8);
         test_agent_mbx.put(instr_agent);
         $display("[%g] Test: Enviada la segunda instruccion al agente transaccion_aleatoria",$time);
 
+//////////////////////////////////////////////////////////////////
+
+        instr_agent = trans_lectura_escritura;
+        test_agent_mbx.put(instr_agent);
+        $display("[%g] Test: Enviada la instruccion de lectura/escritura al agente", $time);
+
+//////////////////////////////////////////////////////////////////
 
         ambiente_inst.agent_inst.ret_spec = 3 ;
         ambiente_inst.agent_inst.tpo_spec = escritura;

@@ -50,6 +50,17 @@ class agent #(parameter width = 16, parameter depth = 8);
                         transaccion.print("Agente: Transaccion Creada.");
                         agnt_drv_mbx.put(transaccion);
                     end
+//////////////////////////////////////////////////////////////////
+
+                    trans_lectura_escritura: begin
+                        transaccion = new;
+                        transaccion.tipo = lectura_escritura;
+                        transaccion.dato = /* valor deseado */;
+                        transaccion.print("Agente: Transaccion de Lectura/Escritura Creada.");
+                        agnt_drv_mbx.put(transaccion);
+                    end
+
+//////////////////////////////////////////////////////////////////
 
                     trans_especifica: begin
                         transaccion = new;

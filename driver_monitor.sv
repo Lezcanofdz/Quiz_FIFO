@@ -3,6 +3,7 @@ class driver #(parameter width =16);
     trans_fifo_mbx agnt_drv_mbx;
     trans_fifo_mbx drv_chkr_mbx;
     int espera;
+
     task run();
         $display("[%g] El driver fue inicializado.", $time);
         @(posedge vif.clk);
@@ -42,6 +43,18 @@ class driver #(parameter width =16);
                     transaction.tiempo = $time;
                     drv_chkr_mbx.put(transaction);
                     transaction.print("Driver: Transaccion ejecutada");
+                end
+
+                lectura_escritura: begin
+                    // Escritura
+                    vif.push <= 1;
+                    vif.dato_in <= transaccion.dato;
+                    @(posedge vif.clk);
+                    vif.push <= 0;
+                    // Lectura
+                    vif.pop <= 1;
+                    @(posedge vif.clk);
+                    vif.pop <= 0;
                 end
 
                 reset: begin

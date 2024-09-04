@@ -71,4 +71,3 @@ typedef mailbox #(trans_fifo) trans_fifo_mbx;
 typedef mailbox #(trans_sb) trans_sb_mbx;
 typedef mailbox #(solicitud_sb) comando_test_sb_mbx;
 typedef mailbox #(instrucciones_agente) comando_test_agent_mbx;
-typedef mailbox #(trans_fifo) drv_chkr_mbx; 
