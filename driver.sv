@@ -1,6 +1,6 @@
 class driver #(parameter width =16);
     virtual fifo_if #(.width(width))vif;
-    trans_fifo_mbx agnt_drv_mbx;
+    trans_fifo_mbx agent_drv_mbx;
     trans_fifo_mbx drv_chkr_mbx;
     int espera;
 
@@ -18,9 +18,9 @@ class driver #(parameter width =16);
             $display("[%g] El driver espera por una transaccion.", $time);
             espera = 0;
             @(posedge vif.clk);
-            agnt_drv_mbx.get(transaction);
+            agent_drv_mbx.get(transaction);
             transaction.print("Driver: Trasaccion recibida.");
-            $display ("Transacciones pendientes en el mbx agnt_drv = %g", agnt_drv_mbx.num());
+            $display ("Transacciones pendientes en el mbx agent_drv = %g", agent_drv_mbx.num());
 
             while (espera < transaction.retardo) begin
                 @(posedge vif.clk);
