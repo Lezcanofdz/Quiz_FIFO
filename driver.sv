@@ -46,15 +46,18 @@ class driver #(parameter width =16);
                 end
 
                 lectura_escritura: begin
-                    // Escritura
-                    vif.push <= 1;
-                    vif.dato_in <= transaccion.dato;
-                    @(posedge vif.clk);
-                    vif.push <= 0;
-                    // Lectura
-                    vif.pop <= 1;
-                    @(posedge vif.clk);
-                    vif.pop <= 0;
+                                                        // Escritura
+                    vif.push = 1;                       // Activa la señal de push para indicar que quiere escribir en la fifo
+                    vif.dato_in = transaccion.dato;     // Coloca el cado en dato_in
+                    @(posedge vif.clk);                 // Se sinroniza con un flanco positivo
+                    vif.push = 0;                       // Desactiva la señal para indicar que ya completo el push
+                                                        // Lectura
+                    vif.pop = 1;                        // Activa la señal de pop para leer de la fifo
+                    @(posedge vif.clk);                 //
+                    vif.pop = 0;                        // Desactiva la señal de pop
+                    transaction.tiempo = $time;         // Tiempo de la transaccion
+                    drv_chkr_mbx.put(transaction);      // Envía la transacción al checker
+                    transaction.print("Driver: Transaccion ejecutada");
                 end
 
                 reset: begin

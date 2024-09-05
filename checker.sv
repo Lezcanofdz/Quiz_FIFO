@@ -64,11 +64,23 @@ class checker #(parameter width=16, parameter depth =8);
                 end
 
                 lectura_escritura: begin
-                    // Verificación de la escritura
-                    if (vif.dato_out !== transaccion.dato) begin
-                        $display("Error: los datos leídos no coinciden con los datos escritos.");
+                    
+                    if (emul_fifo.size() < depth) begin
+                        
+                        emul_fifo.push_back(transaccion);  
+                        to_sb.dato_escrito = transaccion.dato;
+                        to_sb.tiempo_push = transaccion.tiempo;
+                        $display("Checker: Dato %h escrito correctamente.", transaccion.dato);
+                    end else begin
+                        
+                        to_sb.overflow = 1;
+                        to_sb.print("Checker: Overflow en la transacción de escritura.");
+                        chkr_sb_mbx.put(to_sb);
+                        $finish;
                     end
                 end
+
+
                 reset: begin
                     
                     contador_auxiliar = emul_fifo.size(); 

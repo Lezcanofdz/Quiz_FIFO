@@ -6,7 +6,7 @@ class ambiente #(parameter width = 16, parameter depth = 8);
 
     virtual fifo_if #(.width(width)) _if;
 
-    trans_fifo_mbx agnt_drv_mbx;
+    trans_fifo_mbx agent_drv_mbx;
     trans_fifo_mbx drv_chkr_mbx;
     trans_sb_mbx chkr_sb_mbx;
     comando_test_sb_mbx test_sb_mbx;
@@ -14,7 +14,7 @@ class ambiente #(parameter width = 16, parameter depth = 8);
 
     function new();
         drv_chkr_mbx = new();
-        agnt_drv_mbx = new();
+        agent_drv_mbx = new();
         chkr_sb_mbx = new();
         test_sb_mbx = new();
         test_agent_mbx = new();
@@ -26,13 +26,13 @@ class ambiente #(parameter width = 16, parameter depth = 8);
 
         driver_inst.vif = _if;
         driver_inst.drv_chkr_mbx = drv_chkr_mbx;
-        driver_inst.agnt_drv_mbx = agnt_drv_mbx;
+        driver_inst.agent_drv_mbx = agent_drv_mbx;
         checker_inst.drv_chkr_mbx = drv_chkr_mbx;
         checker_inst.chkr_sb_mbx = chkr_sb_mbx;
         scoreboard_inst.chkr_sb_mbx = chkr_sb_mbx;
         scoreboard_inst.test_sb_mbx = test_sb_mbx;
         agent_inst.test_agent_mbx = test_agent_mbx;
-        agent_inst.agnt_drv_mbx = agnt_drv_mbx;
+        agent_inst.agent_drv_mbx = agent_drv_mbx;
     endfunction
 
     virtual task run();

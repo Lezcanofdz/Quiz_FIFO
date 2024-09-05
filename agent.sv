@@ -1,5 +1,5 @@
 class agent #(parameter width = 16, parameter depth = 8);
-    trans_fifo_mbx agnt_drv_mbx;
+    trans_fifo_mbx agent_drv_mbx;
     comando_test_agent_mbx test_agent_mbx;
     int num_transacciones;
     int max_retardo;
@@ -31,7 +31,7 @@ class agent #(parameter width = 16, parameter depth = 8);
                             tpo_spec = escritura;
                             transaccion.tipo = tpo_spec;
                             transaccion.print("Agente: Transaccion Creada.");
-                            agnt_drv_mbx.put(transaccion);
+                            agent_drv_mbx.put(transaccion);
                         end
 
                         for( int i=0; i<num_transacciones; i++) begin
@@ -40,7 +40,7 @@ class agent #(parameter width = 16, parameter depth = 8);
                             tpo_spec = lectura;
                             transaccion.tipo = tpo_spec;
                             transaccion.print("Agente: Transaccion Creada.");
-                            agnt_drv_mbx.put(transaccion);
+                            agent_drv_mbx.put(transaccion);
                         end
                     end
                     trans_aleatoria: begin
@@ -48,16 +48,15 @@ class agent #(parameter width = 16, parameter depth = 8);
                         transaccion.max_retardo = max_retardo;
                         transaccion.randomize();
                         transaccion.print("Agente: Transaccion Creada.");
-                        agnt_drv_mbx.put(transaccion);
+                        agent_drv_mbx.put(transaccion);
                     end
 //////////////////////////////////////////////////////////////////
 
                     trans_lectura_escritura: begin
                         transaccion = new;
                         transaccion.tipo = lectura_escritura;
-                        transaccion.dato = /* valor deseado */;
                         transaccion.print("Agente: Transaccion de Lectura/Escritura Creada.");
-                        agnt_drv_mbx.put(transaccion);
+                        agent_drv_mbx.put(transaccion);
                     end
 
 //////////////////////////////////////////////////////////////////
@@ -68,7 +67,7 @@ class agent #(parameter width = 16, parameter depth = 8);
                         transaccion.dato = dpo_spec;
                         transaccion.retardo = ret_spec;
                         transaccion.print("Agente: Transaccion Creada.");
-                        agnt_drv_mbx.put(transaccion);
+                        agent_drv_mbx.put(transaccion);
                     end
 
                     sec_trans_aleatorias: begin
@@ -77,7 +76,7 @@ class agent #(parameter width = 16, parameter depth = 8);
                             transaccion.max_retardo = max_retardo;
                             transaccion.randomize();
                             transaccion.print("Agente: Transaccion Creada.");
-                            agnt_drv_mbx.put(transaccion);
+                            agent_drv_mbx.put(transaccion);
                         end
                     end
                 endcase
