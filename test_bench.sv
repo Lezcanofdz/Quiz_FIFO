@@ -1,9 +1,9 @@
 `timescale 1ns/1ps
 `include "fifo.sv"
-`include "driver_monitor.sv"
+`include "driver.sv"
 `include "checker.sv"
 `include "score_board.sv"
-`include "agente.sv"
+`include "agent.sv"
 `include "ambiente.sv"
 `include "test.sv"
 
